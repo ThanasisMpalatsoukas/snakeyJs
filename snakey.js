@@ -31,7 +31,7 @@ const COLOR_PALLETE = {
     obstacles: 'red'
 }
 
-const GAME_WIDTH = 400;
+const GAME_WIDTH = 350;
 const GAME_HEIGHT = 300;
 
 const UP = 38;
