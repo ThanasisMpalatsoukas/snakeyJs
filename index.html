@@ -7,24 +7,79 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
     <style>
+
+        :root {
+            --body-bg: #434d56;
+            --game-border: #234900;
+            --game-background: #87da00; 
+        }
+
         body {
             font-family: "Press Start 2P";
+            background-color: var(--body-bg);
         }
 
         canvas {
-            border: 4px solid #234900;
-            background-color: #87da00;
+            border: 4px solid var(--game-border);
+            background-color: var(--game-background);
+        }
+
+        .outter {
+            width:100%;
+            display:flex;
+            justify-content:center;
+            height: 100vh;
+        }
+
+        .game-wrapper {
+            align-self:center;
+            height:300px;
+            width:408px;
+            display:block;
+            background-color: var(--game-background);
+        }
+
+        .game-info {
+            height: 50px;
+            margin-bottom: 8px;
+            border-bottom: 4px solid var(--game-border);
+        }
+
+        .grid-50-50 {
+            display: grid;
+            grid-template-columns: 50% 50%;
+        }
+
+        .score-wrapper {
+            display:flex;
+            height:50px;
+        }
+
+        .score-wrapper #score {
+            align-self: flex-end;
+            font-size: 30px;
+            margin-bottom: 0px;
+        }
+
+        .score-wrapper p {
+            align-self: center;
+            font-size: 15px;
         }
     </style>
 </head>
 <body style="margin: 0;padding: 0;">
-    <div style="width:100%;display:flex;justify-content:center;height: 100vh;">
-        <div style="align-self:center;height:300px;width:408px;display:block;background-color: #87da00;">
-            <div style="height: 50px;margin-bottom: 8px;border-bottom: 4px solid #234900">
+
+    <div class="outter">
+        <div class="game-wrapper">
+            <div class="game-info">
                 
-                <div style="display: grid;grid-column: 50% 50%;">
-                    <div style="display:flex;height:50px;">
-                        <p id="score" style="align-self: flex-end;font-size: 30px;margin-bottom: 0px;">0000</p>
+                <div class="grid-50-50">
+                    <div class="score-wrapper">
+                        <p id="score">0000</p>
+                    </div>
+
+                    <div class="score-wrapper">
+                        <p>ENDLESS MODE</p>
                     </div>
                 </div>
 
@@ -32,6 +87,8 @@
             <canvas id="app" width="400" height="300"></canvas>
         </div>
     </div>
+    
+    
     <script src="./snakey.js"></script>
 </body>
 </html>

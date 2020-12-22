@@ -11,7 +11,16 @@ const initialSnakePos = [
 const obstacles = [
     ...getStarObstacle(11),
     ...getStarObstacle(20),
+    {
+        x: 11,
+        y: 22
+    }
 ];
+
+/**
+ * in miliseconds
+ */
+const SNAKE_SPEED = 150;
 
 const scoreEl = document.getElementById("score");
 
@@ -40,12 +49,12 @@ const foodProvider = {
     superfood: {}
 }
 
+let keyPressed = DOWN;
 
 /**
  * ACTUAL GAMEPLAY
  */
 window.addEventListener("load", (event) => {
-    let keyPressed = DOWN;
     /**
      * Game interval
      */
@@ -103,7 +112,7 @@ window.addEventListener("load", (event) => {
                 snakeArr = moveRight(snakeArr);
                 break;
         }
-    }, 150);
+    }, SNAKE_SPEED);
 
     /**
      * Add special food
@@ -281,3 +290,29 @@ function getStarObstacle(center) {
         {x: center, y: center - 2}
     ]
 }
+
+/** MOBILE GAMING */
+function getTouchPos(canvas, touchEvent) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: touchEvent.touches[0].clientX - rect.left,
+      y: touchEvent.touches[0].clientY - rect.top
+    };
+}
+
+canvas.addEventListener("touchstart", (e) => {
+    let touchPos = getTouchPos(canvas, e);
+    let snakeHeadPos = snakeArr[snakeArr.length - 1];
+
+    console.log(touchPos, snakeHeadPos);
+
+    if (keyPressed === UP || keyPressed === DOWN) {
+        if (touchPos.x > snakeHeadPos.x * 10) keyPressed = RIGHT;
+        if (touchPos.x < snakeHeadPos.x * 10) keyPressed = LEFT;
+    } else {
+        if (touchPos.y > snakeHeadPos.y * 10) keyPressed = DOWN;
+        if (touchPos.y < snakeHeadPos.y * 10) keyPressed = UP;
+    }
+
+    console.log(keyPressed);
+});
